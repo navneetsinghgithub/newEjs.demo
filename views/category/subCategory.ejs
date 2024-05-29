@@ -1,0 +1,133 @@
+<%-include("../common/header.ejs")%>
+    <%-include("../common/Navbar.ejs")%>
+        <%-include("../common/Sidebar.ejs")%>
+
+            <div class="app-content content ">
+                <div class="content-overlay"></div>
+                <div class="header-navbar-shadow"></div>
+                <div class="content-wrapper container-xxl p-0">
+                    <div class="content-body">
+                        <section id="responsive-datatable">
+                            <div class="row">
+                                <div class="card">
+                                    <div class="card-header border-bottom">
+                                        <h4 class="card-title">Category</h4>
+                                        <a href="/addSubCategory">
+                                            <button type="submit" class="btn btn-icon icon-left btn-primary shadow">Add
+                                                subCategory</button></a>
+                                    </div>
+                                    <br>
+                                    <div class="card-DataTable table-responsive">
+                                        <table id="userTable" class="table table-hover-animation">
+                                            <thead>
+                                                <tr>
+                                                    <th>S NO.</th>
+                                                    <th>First Name</th>
+                                                    <th>Category Name</th>
+                                                    <th>Image</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%Data.forEach(function(data,i) {%>
+                                                    <tr>
+                                                        <td>
+                                                            <%=1+i%>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.name%>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.categoryId?.name%>
+                                                        </td>
+                                                        <td>
+                                                            <img src="/images/userImage/<%=data.image%>" height="50"
+                                                                width="50" class="rounded-circle" alt="">
+                                                        </td>
+                                                        <td>
+                                                            <a href="/subCategoryView/<%=data._id%>"
+                                                                class="btn btn-sm btn-outline-success"><i
+                                                                    data-feather='eye'></i></a>
+
+                                                            <a href="/editSubCategory/<%=data._id%>"
+                                                                class="btn btn-sm btn-outline-success"><i
+                                                                    data-feather='edit'></i></a>
+                                                            <button onclick="confirmDelete('<%=data._id%>')"
+                                                                class="btn btn-sm btn-outline-danger"> <i
+                                                                    data-feather='trash'></i> </button>
+                                                        </td>
+                                                    </tr>
+                                                    <% } )%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" sidenav-overlay">
+            </div>
+            <div class="drag-target"></div>
+            <%- include('../common/footer') %>
+
+                <script>
+                    setTimeout(function () {
+                        $("div.msg").fadeOut();
+                    }, 2000);
+                </script>
+
+                <script>
+                    $(document).ready(function () {
+                        $('#userTable').DataTable(); // Initialize DataTable for the user table
+                    });
+                </script>
+
+                <script>
+                    function confirmDelete(id) {
+                        // alert(id,"iiiid")                                    
+                        const swalWithBootstrapButtons = Swal.mixin({
+                            customClass: {
+                                confirmButton: 'btn btn-outline-danger btn-sm ',
+                                cancelButton: 'btn btn-outline-success btn-sm '
+                            },
+                            buttonsStyling: false
+                        })
+                        swalWithBootstrapButtons.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes',
+                            cancelButtonText: 'No',
+                            reverseButtons: true
+                        }).then((isConfirm) => {
+                            if (isConfirm.isConfirmed) {
+                                $.ajax({
+                                    url: "/deleteSubCategory",
+                                    type: 'post',
+                                    data: {
+                                        id: id
+                                    },
+                                    success: function (result) {
+                                    }
+                                });
+                                swalWithBootstrapButtons.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success'
+                                ).then(() => {
+                                    location.reload();
+                                })
+                            } else {
+                                swalWithBootstrapButtons.fire(
+                                    'Cancelled',
+                                    'Your file is safe',
+                                    'error'
+                                )
+                            }
+                        })
+                    }
+                </script>

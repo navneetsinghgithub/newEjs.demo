@@ -1,0 +1,171 @@
+<%-include("../common/header.ejs")%>
+    <%-include("../common/Navbar.ejs")%>
+        <%-include("../common/Sidebar.ejs")%>
+            <!-- BEGIN: Content-->
+            <div class="app-content content ">
+                <div class="content-overlay"></div>
+                <div class="header-navbar-shadow"></div>
+                <div class="content-wrapper container-xxl p-0">
+                    <div class="content-body">
+                        <section id="responsive-datatable">
+                            <div class="row">
+                                <div class="card">
+                                    <div class="card-header border-bottom">
+                                        <h4 class="card-title"> Listing</h4>
+                                        <a href="/addDoctor">
+                                            <button type="submit" class="btn btn-icon icon-left btn-primary shadow">Add Booking</button></a>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="card-DataTable table-responsive">
+                                        <table id="userTable" class="table table-hover-animation">
+                                            <thead>
+                                                <tr>
+                                                    <th>S NO.</th>
+                                                    <th>Doctor Name</th>
+                                                     <th>patient Name</th>
+                                                    <th>Title</th>
+                                                    <th>Fees</th>    
+                                                    <th>Date</th>                                                                                                
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%bokingData.forEach(function(data,i) {%>
+                                                    <tr>
+                                                        <td>
+                                                            <%=1+i%>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.doctorId?.name%>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.patientId?.name%>
+                                                        </td>
+                                                         <td>
+                                                            <%=data.title%>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.fees%>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.date%>
+                                                        </td>                                                                                                    
+                                                        <td>
+                                                            <% if(data.status=="Active" ) { %>
+                                                                <button onclick="changeStatus(this)"
+                                                                    id="id<%=data._id%>"
+                                                                    class="btn btn-success status btn-sm"
+                                                                    data-id="<%=data._id%>"
+                                                                    value="Inactive">Accept</button>
+                                                                <% } else { %>
+                                                                    <button onclick="changeStatus(this)"
+                                                                        id="id<%=data._id%>"
+                                                                        class="btn btn-danger status btn-sm"
+                                                                        data-id="<%=data._id%>" value="Active"
+                                                                        style="display: flex;font-size: 9px;">Reject</button>
+                                                                    <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <a href="bookingView/<%=data._id%>"
+                                                                class="btn btn-sm btn-outline-success"><i
+                                                                    data-feather='eye'></i></a>
+                                                            <!-- <button onclick="confirmDelete('<%=data._id%>')"
+                                                                class="btn btn-sm btn-outline-danger""> <i
+                                                data-feather='trash'></i> </button> -->
+                                        </td>
+                                    </tr>
+                                    <% } )%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div class=" sidenav-overlay">
+                                    </div>
+                                    <div class="drag-target"></div>
+                                    <%- include('../common/footer') %>
+                                        <script>
+                                            setTimeout(function () {
+                                                $("div.msg").fadeOut();
+                                            }, 2000);
+                                        </script>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#userTable').DataTable(); // Initialize DataTable for the user table
+                                            });
+                                        </script>
+
+                                        <!-- <script>
+                                            function confirmDelete(id) {                                         
+                                                const swalWithBootstrapButtons = Swal.mixin({
+                                                    customClass: {
+                                                        confirmButton: 'btn btn-outline-danger btn-sm ',
+                                                        cancelButton: 'btn btn-outline-success btn-sm '
+                                                    },
+                                                    buttonsStyling: false
+                                                })
+                                                swalWithBootstrapButtons.fire({
+                                                    title: 'Are you sure?',
+                                                    text: "You won't be able to revert this!",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonText: 'Yes',
+                                                    cancelButtonText: 'No',
+                                                    reverseButtons: true
+                                                }).then((isConfirm) => {                                                                                               
+                                                    if (isConfirm.isConfirmed) {                                             
+                                                        $.ajax({
+                                                            url: "/deleteUser",
+                                                            type: 'post',
+                                                            data: {
+                                                                id: id
+                                                            },
+                                                            success: function (result) {
+                                                            }
+                                                        });
+                                                        swalWithBootstrapButtons.fire(
+                                                            'Deleted!',
+                                                            'Your file has been deleted.',
+                                                            'success'
+                                                        ).then(() => {
+                                                            location.reload();
+                                                        })
+                                                    } else {
+                                                        swalWithBootstrapButtons.fire(
+                                                            'Cancelled',
+                                                            'Your file is safe',
+                                                            'error'
+                                                        )
+                                                    }
+                                                })
+                                            }
+                                        </script> -->
+
+                                        <script>
+                                            function changeStatus(button) {
+                                                var _id = button.getAttribute('data-id');
+                                                var value = button.getAttribute('value');
+                                                $.ajax({
+                                                    type: "post",
+                                                    url: "/bookingStatus/" + _id,
+                                                    data: {
+                                                        status: value
+                                                    },
+                                                    success: function (data) {
+                                                        console.log(data); // Log the data received from the server
+                                                        window.location.reload(); // Refresh the entire page
+                                                    },
+                                                    error: function (error) {
+                                                        console.error(error.responseText);
+                                                    }
+                                                });
+                                            }
+                                        </script>

@@ -1,0 +1,243 @@
+<%-include("../common/header.ejs")%>
+    <%-include("../common/Navbar.ejs")%>
+        <%-include("../common/Sidebar.ejs")%>
+
+            <% if(msg !='' ) { %>
+                <div class="alert alert-success msg"
+                    style="position: absolute; z-index: 9999; color:rgb(36, 23, 23); background-color:  #e0d1bf; right: 10px; top: 10px;">
+                    <span style="font-size: 16px;">
+                        <%= msg %>
+                    </span>
+                </div>
+                <% } %>
+
+                    <div class="app-content content ">
+                        <div class="content-overlay"></div>
+                        <div class="header-navbar-shadow"></div>
+                        <div class="content-wrapper container-xxl p-0">
+                            <div class="content-header row">
+                            </div>
+                            <div class="content-body">
+                                <section id="dashboard-ecommerce">
+                                    <div class="row match-height">
+                                        <div class="col-xl-4 col-md-6 col-12">
+                                            <div class="card card-congratulation-medal">
+                                                <div class="card-body">
+                                                    <h5>Congratulations 🎉 John!</h5>
+                                                    <p class="card-text font-small-3">You have won gold medal</p>
+                                                    <h3 class="mb-75 mt-2 pt-50">
+                                                        <a href="#">$48.9k</a>
+                                                    </h3>
+                                                    <button type="button" class="btn btn-primary">View Sales</button>
+                                                    <img src="../../../app-assets/images/illustration/badge.svg"
+                                                        class="congratulation-medal" alt="Medal Pic" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-8 col-md-6 col-12">
+                                            <div class="card card-statistics">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Statistics</h4>
+                                                    <div class="d-flex align-items-center">
+                                                        <p class="card-text font-small-2 me-25 mb-0">Updated 1 month ago
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body statistics-body">
+                                                    <div class="row">
+                                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                                            <div class="d-flex flex-row">
+                                                                <div class="avatar bg-light-primary me-2">
+                                                                    <div class="avatar-content">
+                                                                        <i data-feather="trending-up"
+                                                                            class="avatar-icon"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="my-auto">
+                                                                    <h4 class="fw-bolder mb-0">230k</h4>
+                                                                    <p class="card-text font-small-3 mb-0">Sales</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                                            <div class="d-flex flex-row">
+                                                                <div class="avatar bg-light-info me-2">
+                                                                    <div class="avatar-content">
+                                                                        <i data-feather="user" class="avatar-icon"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="my-auto">
+                                                                    <h4 class="fw-bolder mb-0">8.549k</h4>
+                                                                    <p class="card-text font-small-3 mb-0">Customers</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
+                                                            <div class="d-flex flex-row">
+                                                                <div class="avatar bg-light-danger me-2">
+                                                                    <div class="avatar-content">
+                                                                        <i data-feather="box" class="avatar-icon"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="my-auto">
+                                                                    <h4 class="fw-bolder mb-0">1.423k</h4>
+                                                                    <p class="card-text font-small-3 mb-0">Products</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-sm-6 col-12">
+                                                            <div class="d-flex flex-row">
+                                                                <div class="avatar bg-light-success me-2">
+                                                                    <div class="avatar-content">
+                                                                        <i data-feather="dollar-sign"
+                                                                            class="avatar-icon"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="my-auto">
+                                                                    <h4 class="fw-bolder mb-0">$9745</h4>
+                                                                    <p class="card-text font-small-3 mb-0">Revenue</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div style="width: 500px;">
+                                            <div id="pieChart" style="width: 100%; max-width: 500px; height: 350px;">
+                                            </div>
+                                        </div>
+                                        <div style="width: 500px;">
+                                            <div id="barChart" style="width: 100%; max-width: 500px; height: 350px;">
+                                            </div>
+                                        </div>
+                                        
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+        <%-include("../common/Footer.ejs")%>
+                   
+
+
+
+                        <!-- //////////////////////////ApexChart//////////////////////// -->
+
+
+
+                        <link rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.2/apexcharts.min.css"
+                            integrity="sha512-qc0GepkUB5ugt8LevOF/K2h2lLGIloDBcWX8yawu/5V8FXSxZLn3NVMZskeEyOhlc6RxKiEj6QpSrlAoL1D3TA=="
+                            crossorigin="anonymous" referrerpolicy="no-referrer" />
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.2/apexcharts.min.js"
+                            integrity="sha512-0C7wVtM3EhVJMUXV6o50mKRgLwKZf+aRws1BhqmNabPNIkGEvyPncYBmXhpl4A3+TdpkY2HFiI3Eyv32uVGo4g=="
+                            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+                            <script>
+                                const bookCountArr = JSON.parse('<%= JSON.stringify(countBook) %>');
+                                const bookmonthArr = JSON.parse('<%= JSON.stringify(monthBook) %>');
+                                var options = {
+                                    series: [{
+                                        name: 'Boking',
+                                        data: bookCountArr,
+                                        // data: [44, 55, 41,23]
+                                    }],
+                                    chart: {
+                                        height: 350,
+                                        type: 'bar',
+                                    },
+                                    plotOptions: {
+                                        bar: {
+                                            borderRadius: 5,
+                                            columnWidth: '50%',
+                                        }
+                                    },
+                                    dataLabels: {
+                                        enabled: false
+                                    },
+                                    stroke: {
+                                        width: 3,
+                                        colors: ['var(--bgtheme)']
+                                    },
+                                    grid: {
+                                        row: {
+                                            colors: ['#fff', '#f2f2f2']
+                                        }
+                                    },
+                                    xaxis: {
+                                        title: {
+                                            text: 'Months',
+                                        },
+                                        labels: {
+                                            rotate: -45
+                                        },
+                                        // categories: monthArr,
+                                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+                                        tickPlacement: 'on'
+                                    },
+                                    yaxis: {
+                                        title: {
+                                            text: 'Boking',
+                                        },
+                                    },
+                                    fill: {
+                                        type: 'gradient',
+                                        toolbar: {
+                                            show: false,
+                                        },
+                                        gradient: {
+                                            shade: 'light',
+                                            type: "horizontal",
+                                            shadeIntensity: 0.25,
+                                            // gradientToColors: undefined,
+                                            gradientToColors: ['var(--bgtheme)'],
+                                            inverseColors: true,
+                                            opacityFrom: 0.85,
+                                            opacityTo: 0.85,
+                                            // stops: [50, 0, 100]
+                                            stops: [100]
+                                        },
+                                    }
+                                };
+                                var book = new ApexCharts(document.querySelector("#barChart"), options);
+                                book.render();                  
+                            </script>
+
+
+                            <script>
+                                let doctor = "<%-doctor%>";
+                                let patient = "<%-patient%>";
+                                let boking = "<%-boking%>"
+    
+                                var options = {
+                                    series: [parseInt(doctor), parseInt(patient), parseInt(boking)],
+                                    chart: {
+                                        width: '100%',
+                                        type: 'pie',
+                                    },
+                                    labels: ["doctor", "patient", "boking"],
+                                    plotOptions: {
+                                        pie: {
+                                            dataLabels: {
+                                                offset: 5
+                                            }
+                                        }
+                                    },
+                                    legend: {
+                                        show: true,
+                                        position: 'right',
+                                        offsetY: 50
+                                    }
+                                };
+                                var chart = new ApexCharts(document.querySelector("#pieChart"), options);
+                                chart.render();
+                            </script>
+              
+                        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                       

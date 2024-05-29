@@ -1,0 +1,112 @@
+<%-include("../common/header.ejs")%>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script>
+    <script src=<script src="https://cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script>
+
+    <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click"
+        data-menu="vertical-menu-modern" data-col="">
+        <%-include("../common/Navbar.ejs")%>
+            <%-include("../common/Sidebar.ejs")%>
+
+                <div class="app-content content ">
+                    <div class="content-overlay"></div>
+                    <div class="header-navbar-shadow"></div>
+                    <div class="content-wrapper container-xxl p-0">
+                        <div class="content-header row">
+                            <div class="content-header-left col-md-9 col-12 mb-2">
+                                <div class="row breadcrumbs-top">
+                                </div>
+                            </div>
+                            <!-- <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
+          <div class="mb-1 breadcrumb-right">
+            <div class="dropdown">
+              <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+              <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i class="me-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="me-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="me-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
+            </div>
+          </div>
+        </div> -->
+                        </div>
+                        <div class="content-body">
+                            <h1><%-data.title%></h1>
+                            <section id="page-account-settings">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="tab-content">
+                                                    <div role="tabpanel" class="tab-pane active"
+                                                        id="account-vertical-general"
+                                                        aria-labelledby="account-pill-general" aria-expanded="true">
+                                                        <form class="validate-form mt-2" action="updateAboutCms"
+                                                            method="post" enctype="multipart/form-data">
+                                                            <div class="row">
+                                                                <div class="mt-75 ms-1">
+                                                                </div>
+                                                                <div class="col-12 col-sm-12">
+                                                                    <div class="col-12 col-sm-12">
+                                                                        <div class="mb-1">
+                                                                            <label class="form-label"
+                                                                                for="account-username">Title</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="title" name="title"
+                                                                                placeholder="name"
+                                                                                value="<%-data.title%>" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 col-sm-12">
+                                                                        <div class="mb-1">
+                                                                            <label class="form-label"
+                                                                                for="account-username">Content</label>
+                                                                            <textarea
+                                                                                name="editor1"><%-data?.content%></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary mt-2 me-1">Save</button>
+                                                                        <a type="reset"
+                                                                            class="btn btn-outline-secondary mt-2"
+                                                                            href="/dashboard">Cancel</a>
+                                                                    </div>
+                                                                </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidenav-overlay"></div>
+                <div class="drag-target"></div>
+
+                <%-include("../common/Footer.ejs")%>
+
+                    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+                    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+                    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
+                    <script src="../../../app-assets/js/core/app-menu.js"></script>
+                    <script src="../../../app-assets/js/core/app.js"></script>
+                    <script src="../../../app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+                    <script>
+                        $(window).on('load', function () {
+                            if (feather) {
+                                feather.replace({
+                                    width: 14,
+                                    height: 14
+                                });
+                            }
+                        })
+                    </script>
+                    <script src="/ckeditor/ckeditor.js"></script>
+                    <script src="/ckeditor/plugins/colordialog/"></script>
+                    <script>
+                        CKEDITOR.replace('editor1');
+                    </script>
+    </body>
+    </html>

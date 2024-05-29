@@ -1,0 +1,28 @@
+{
+  "name": "ejs-project",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "ckeditor": "^4.12.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "express": "~4.16.1",
+    "express-fileupload": "^1.5.0",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.18.0",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "module": "^1.2.5",
+    "mongoose": "^8.2.3",
+    "morgan": "~1.9.1",
+    "node-input-validator": "^4.5.1",
+    "nodemon": "^3.1.0",
+    "sweetalert2": "^11.10.7"
+  }
+}
